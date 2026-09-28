@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import java.util.function.Supplier;
@@ -8,14 +7,13 @@ import java.util.function.Supplier;
 public class intakeV3 {
 
     private static DcMotorEx intake;
-    Supplier button = null;
 
+    private boolean button;
 
-
-
-    public void initIntake(HardwareMap hardwareMap){
+    public void initIntake(HardwareMap hardwareMap, boolean Toggler){
 
         intake = hardwareMap.get(DcMotorEx.class, "intake");
+        button = Toggler;
 
     }
     private enum MotorState{
@@ -35,9 +33,12 @@ public class intakeV3 {
 
         if (currentState == MotorState.MOTOR_OFF) {
             currentState = MotorState.MOTOR_ON;
+
         } else {
             currentState = MotorState.MOTOR_OFF;
         }
+
+        intake.setPower(currentState.power);
     }
 
 

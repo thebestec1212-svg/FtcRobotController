@@ -13,7 +13,7 @@ public class newRobotTeleopMecanum extends OpMode {
     @Override
     public void init() {
     MDF.initMecanum(hardwareMap);
-    intake.initIntake(hardwareMap, gamepad1.a);
+    intake.initIntake(hardwareMap, gamepad1.b);
     }
 
     IMU imu;
@@ -36,6 +36,10 @@ public class newRobotTeleopMecanum extends OpMode {
             MDF.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
         } else {
             MDF.driveFieldRelative(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+        }
+
+        if (gamepad1.b){
+            intake.toggleState();
         }
     }
 
