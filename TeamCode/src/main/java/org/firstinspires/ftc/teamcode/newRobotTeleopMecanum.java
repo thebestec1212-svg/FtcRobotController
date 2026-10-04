@@ -2,18 +2,37 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
 
 @TeleOp(name = "Robot: USE THIS MECANUM", group = "Robot")
 public class newRobotTeleopMecanum extends OpMode {
 
+    private DcMotor transfer, shooter;
     mecanumDriveFunctions MDF = new mecanumDriveFunctions();
     intakeV3 intake = new intakeV3();
     targetLock TL = new targetLock();
     @Override
     public void init() {
-    MDF.initMecanum(hardwareMap);
-    intake.initIntake(hardwareMap, gamepad1.b);
+        MDF.initMecanum(hardwareMap);
+        intake.initIntake(hardwareMap);
+
+        transfer = hardwareMap.get(DcMotor.class, "transfer");
+        shooter = hardwareMap.get(DcMotor.class, "shooter");
+
+        transfer.setDirection(DcMotor.Direction.REVERSE);
+        shooter.setDirection(DcMotor.Direction.REVERSE);
+    }
+
+    private enum transferState{
+        MOTOR_ON(1.0),
+        MOTOR_OFF(0.0);
+
+        public final double power;
+
+        transferState(double power) {
+            this.power = power;
+        }
     }
 
     IMU imu;
@@ -38,9 +57,24 @@ public class newRobotTeleopMecanum extends OpMode {
             MDF.driveFieldRelative(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
         }
 
-        if (gamepad1.b){
+        if (gamepad2.b){
             intake.toggleState();
         }
+
+        transfer.setPower(1);
+        shooter.setPower(1);
+
+        /*if (gamepad2.a){
+            if (transferState == transferState.MOTOR_OFF) {
+                currentState = intakeV3.MotorState.MOTOR_ON;
+
+            } else {
+                currentState = intakeV3.MotorState.MOTOR_OFF;
+            }
+
+            intake.setPower(currentState.power);
+        }*/
+
     }
 
 

@@ -10,10 +10,9 @@ public class intakeV3 {
 
     private boolean button;
 
-    public void initIntake(HardwareMap hardwareMap, boolean Toggler){
+    public void initIntake(HardwareMap hardwareMap){
 
         intake = hardwareMap.get(DcMotorEx.class, "intake");
-        button = Toggler;
 
     }
     private enum MotorState{

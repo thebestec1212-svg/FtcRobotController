@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.acmerobotics.dashboard.config.Config;
+// com.acmerobotics.dashboard.config.Config;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Config
+//@Config
 public class PIDF {
     private double kP, kI, kD, kF;
     private double targetPosition = 0;

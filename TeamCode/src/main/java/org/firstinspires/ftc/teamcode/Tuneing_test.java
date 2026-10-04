@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.acmerobotics.dashboard.config.Config;
+//import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@Config
+//@Config
 @TeleOp(name="Tuneing test")
 public class Tuneing_test extends LinearOpMode {
 
@@ -14,7 +14,7 @@ public class Tuneing_test extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        telemetry = com.acmerobotics.dashboard.FtcDashboard.getInstance().getTelemetry();
+        //telemetry = com.acmerobotics.dashboard.FtcDashboard.getInstance().getTelemetry();
 
         waitForStart();
 
