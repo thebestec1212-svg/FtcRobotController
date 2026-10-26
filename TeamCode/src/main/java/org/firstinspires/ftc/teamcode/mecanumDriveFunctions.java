@@ -58,6 +58,7 @@ public class mecanumDriveFunctions {
     // This declares the IMU needed to get the current direction the robot is facing
     IMU imu;
 
+
     public void initMecanum(HardwareMap hardwareMap) {
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
@@ -111,6 +112,9 @@ public class mecanumDriveFunctions {
     }
 
     // Thanks to FTC16072 for sharing this code!!
+
+    double maxPower = 1.0;
+    double maxSpeed = 0.5;  // make this slower for outreaches
     public void drive(double forward, double right, double rotate) {
         // This calculates the power needed for each wheel based on the amount of forward,
         // strafe right, and rotate
@@ -119,8 +123,7 @@ public class mecanumDriveFunctions {
         double backRightPower = forward + right - rotate;
         double backLeftPower = forward - right + rotate;
 
-        double maxPower = 1.0;
-        double maxSpeed = 0.5;  // make this slower for outreaches
+
 
         // This is needed to make sure we don't pass > 1.0 to any wheel
         // It allows us to keep all of the motors in proportion to what they should
@@ -140,7 +143,16 @@ public class mecanumDriveFunctions {
 
     }
 
-    public Object getSpeed(){
-        return "FL" + Double.toString(frontLeft.getPower()) + "FR" + Double.toString(frontRight.getPower()) + "BL" + Double.toString(backLeft.getPower()) + "BR" + Double.toString(backRight.getPower());
+    public String[] getTelemtry(){
+        return new String[]{
+                "---Max power and speed---",
+                "Max power:" + maxPower,
+                "Max speed:" + maxSpeed,
+                "---Motor Power---",
+                "FL:" + Double.toString(frontLeft.getPower()),
+                "FR:" + Double.toString(frontRight.getPower()),
+                "BL:" + Double.toString(backLeft.getPower()),
+                "BR:" + Double.toString(backRight.getPower())
+        };
     }
 }

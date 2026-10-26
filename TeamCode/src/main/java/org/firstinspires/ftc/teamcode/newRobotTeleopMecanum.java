@@ -61,13 +61,15 @@ public class newRobotTeleopMecanum extends OpMode {
 
     @Override
     public void loop() {
-        String GetSpeed = MDF.getSpeed().toString();
+        String[] mechTele = MDF.getTelemtry();
         telemetry.addLine("Press x to reset Yaw");
         telemetry.addLine("Hold left bumper to drive in robot relative");
         telemetry.addLine("The left joystick sets the robot direction");
         telemetry.addLine("Moving the right joystick left and right turns the robot");
         telemetry.addLine("Aim robot the robot direction as you and press x to reset yaw");
-        telemetry.addLine(GetSpeed);
+        for (int i = 0; i < mechTele.length; i++){
+            telemetry.addLine(mechTele[i]);
+        }
         // If you press the A button, then you reset the Yaw to be zero from the way
         // the robot is currently pointing
         if (gamepad1.right_bumper) {
