@@ -1,17 +1,15 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import java.util.function.Supplier;
 
-public class intakeV3 {
+public class IntakeV3 {
 
     private static DcMotorEx intake;
 
     private boolean button;
 
-    public void initIntake(HardwareMap hardwareMap){
+    public void initIntake(HardwareMap hardwareMap, double maxIntake){
 
         intake = hardwareMap.get(DcMotorEx.class, "intake");
 

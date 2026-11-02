@@ -49,9 +49,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  *
  */
-public class mecanumDriveFunctions {
-
-    targetLock TL = new targetLock();
+public class MecanumDriveFunctions {
     // This declares the four motors needed
     private DcMotor frontLeft, backLeft, frontRight, backRight;
 
@@ -59,7 +57,7 @@ public class mecanumDriveFunctions {
     IMU imu;
 
 
-    public void initMecanum(HardwareMap hardwareMap) {
+    public void initMecanum(HardwareMap hardwareMap, double maxPower, double maxSpeed) {
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
@@ -141,6 +139,13 @@ public class mecanumDriveFunctions {
         backLeft.setPower(maxSpeed * (backLeftPower / maxPower));
         backRight.setPower(maxSpeed * (backRightPower / maxPower));
 
+    }
+
+    // Inside mecanumDriveFunctions.java
+    public void resetYaw() {
+        if (imu != null) {
+            imu.resetYaw();
+        }
     }
 
     public String[] getTelemtry(){
