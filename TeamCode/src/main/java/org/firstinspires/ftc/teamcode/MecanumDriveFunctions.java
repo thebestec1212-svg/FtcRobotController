@@ -112,7 +112,7 @@ public class MecanumDriveFunctions {
     // Thanks to FTC16072 for sharing this code!!
 
     double maxPower = 1.0;
-    double maxSpeed = 0.5;  // make this slower for outreaches
+    double maxSpeed = 1.0;  // make this slower for outreaches
     public void drive(double forward, double right, double rotate) {
         // This calculates the power needed for each wheel based on the amount of forward,
         // strafe right, and rotate

@@ -5,41 +5,28 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class IntakeV3 {
 
-    private static DcMotorEx intake;
+    private DcMotorEx intake;
+    private double maxIntake = 1.0;
 
-    private boolean button;
-
-    public void initIntake(HardwareMap hardwareMap, double maxIntake){
-
-        intake = hardwareMap.get(DcMotorEx.class, "intake");
-
-        //intake.setDirection(DcMotor.Direction.REVERSE);
-
-    }
-    private enum MotorState{
-        MOTOR_ON(1.0),
-        MOTOR_OFF(0.0);
-
-        public final double power;
-
-        MotorState(double power) {
-            this.power = power;
-        }
+    public enum MotorState {
+        MOTOR_ON,
+        MOTOR_OFF
     }
 
     private MotorState currentState = MotorState.MOTOR_OFF;
 
-    public void toggleState(){
-
-        if (currentState == MotorState.MOTOR_OFF) {
-            currentState = MotorState.MOTOR_ON;
-
-        } else {
-            currentState = MotorState.MOTOR_OFF;
-        }
-
-        intake.setPower(currentState.power);
+    public void initIntake(HardwareMap hardwareMap, double maxIntake) {
+        this.maxIntake = maxIntake;
+        intake = hardwareMap.get(DcMotorEx.class, "intake");
     }
 
-
+    public void toggleState() {
+        if (currentState == MotorState.MOTOR_OFF) {
+            currentState = MotorState.MOTOR_ON;
+            intake.setPower(maxIntake);
+        } else {
+            currentState = MotorState.MOTOR_OFF;
+            intake.setPower(0.0);
+        }
+    }
 }
